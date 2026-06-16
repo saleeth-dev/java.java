@@ -140,3 +140,106 @@ public class Solution {
         scanner.close();
     }
 }
+
+import java.util.Scanner;
+
+class InventorySystem {
+
+    static Scanner sc = new Scanner(System.in);
+
+    static String[] products = new String[50];
+    static int[] quantity = new int[50];
+    static int count = 0;
+
+    public static void main(String[] args) {
+
+        int choice;
+
+        do {
+            System.out.println("\n===== INVENTORY SYSTEM =====");
+            System.out.println("1. Add Product");
+            System.out.println("2. View Products");
+            System.out.println("3. Search Product");
+            System.out.println("4. Exit");
+            System.out.print("Enter Choice: ");
+
+            choice = sc.nextInt();
+            sc.nextLine();
+
+            switch(choice) {
+
+                case 1:
+                    addProduct();
+                    break;
+
+                case 2:
+                    viewProducts();
+                    break;
+
+                case 3:
+                    searchProduct();
+                    break;
+
+                case 4:
+                    System.out.println("Thank You!");
+                    break;
+
+                default:
+                    System.out.println("Invalid Choice!");
+            }
+
+        } while(choice != 4);
+    }
+
+    static void addProduct() {
+
+        System.out.print("Enter Product Name: ");
+        products[count] = sc.nextLine();
+
+        System.out.print("Enter Quantity: ");
+        quantity[count] = sc.nextInt();
+
+        count++;
+
+        System.out.println("Product Added Successfully!");
+    }
+
+    static void viewProducts() {
+
+        if(count == 0) {
+            System.out.println("No Products Available.");
+            return;
+        }
+
+        System.out.println("\n===== PRODUCT LIST =====");
+
+        for(int i = 0; i < count; i++) {
+            System.out.println(products[i] + " - Quantity: " + quantity[i]);
+        }
+    }
+
+    static void searchProduct() {
+
+        System.out.print("Enter Product Name: ");
+        String search = sc.nextLine();
+
+        boolean found = false;
+
+        for(int i = 0; i < count; i++) {
+
+            if(products[i].equalsIgnoreCase(search)) {
+
+                System.out.println("Product Found!");
+                System.out.println("Name: " + products[i]);
+                System.out.println("Quantity: " + quantity[i]);
+
+                found = true;
+                break;
+            }
+        }
+
+        if(!found) {
+            System.out.println("Product Not Found!");
+        }
+    }
+}
